@@ -1,0 +1,1 @@
+This will be local themes dir mapped to docker container
