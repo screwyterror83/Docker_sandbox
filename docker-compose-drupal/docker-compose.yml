@@ -1,0 +1,19 @@
+version: '2'
+
+services:  # containers. same as docker run
+  drupal: # a friendly name. this is also DNS name inside network
+    image: drupal:latest # Optional if you use build:
+    ports: 
+      - '8080:80'
+    volumes: # Optional, same as -v in docker run
+      - ./modules:/var/www/html/modules
+      - ./profiles:/var/www/html/profiles
+      - ./themes:/var/www/html/themes
+      - ./sites:/var/www/html/sites 
+    restart: always
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: testing123
+    restart: always
