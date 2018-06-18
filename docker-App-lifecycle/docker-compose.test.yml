@@ -14,7 +14,7 @@ services:
     secrets:
       - psql-pw
     volumes:
-      ./sample-data:/var/lib/postgresql/data
+      - ./sample-data:/var/lib/postgresql/data
     
 secrets:
   psql-pw:
