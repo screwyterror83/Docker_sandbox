@@ -1,1 +1,1 @@
-Test for new app dev cycle
+Test for new app dev cycle, This folder is for experiment purpose, and the contents of this folder should be bind mounted to container directory which specifies it.
