@@ -1,0 +1,29 @@
+secrets:
+  psql-pw:
+    external: true
+services:
+  drupal:
+    image: screwyterror83/custom-drupal:latest
+    ports:
+    - 80:80/tcp
+    volumes:
+    - drupal_modules:/var/www/html/modules:rw
+    - drupal_profiles:/var/www/html/profiles:rw
+    - drupal_sites:/var/www/html/sites:rw
+    - drupal_themes:/var/www/html/themes:rw
+  postgres:
+    environment:
+      POSGRES_PASSWORD_FILE:/run/secrets/psql-pw: null
+    image: postgres:9.6
+    secrets:
+    - source: psql-pw
+    volumes:
+    - drupal_data:/var/lib/postgresql/data:rw
+version: '3.1'
+volumes:
+  drupal_data: {}
+  drupal_modules: {}
+  drupal_profiles: {}
+  drupal_sites: {}
+  drupal_themes: {}
+
