@@ -1,29 +1,25 @@
 # create your drupal and postgres config here, based off the last assignment
-version: '2'
+version: '3.1'
 
 services:  # containers. same as docker run
   drupal: # a friendly name. this is also DNS name inside network
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: screwyterror83/custom-drupal:latest
+    build: .
 #    image: drupal:latest # Optional if you use build:
     ports: 
       - '8080:80'
     volumes: # Optional, same as -v in docker run
-      - drupal_modules:/var/www/html/modules
-      - drupal_profiles:/var/www/html/profiles
-      - drupal_themes:/var/www/html/themes
-      - drupal_sites:/var/www/html/sites 
-    restart: always
+      - drupal_modules: /var/www/html/modules
+      - drupal_profiles: /var/www/html/profiles
+      - ./themes: /var/www/html/themes
+      - drupal_sites: /var/www/html/sites 
 
   postgres:
-    image: postgres:9.6
     environment:  #if don't specify POSTGRESS_DB, the default value for db username will be 'postgres'
-      POSTGRES_PASSWORD: testing123
+      - POSTGRES_PASSWORD_FILE: /run/secrets/psql-pw
+    secrets:
+      - psql-pw
     volumes: 
-      - drupal-data:/var/lib/postgresql/data
-    restart: always
+      - drupal-data: /var/lib/postgresql/data
 
 volumes:
   drupal_modules:
@@ -31,4 +27,7 @@ volumes:
   drupal_themes:
   drupal_sites:
   drupal-data:
-  
+
+secrets:
+  psql-pw:
+    file: psql-fake-password.txt

@@ -1,0 +1,2 @@
+In this directory: 
+'docker-compose.yml' is base file for docker-compose up, and if the file with name name 'docker-compose.overrite.yml' exists, {docker-compose up} command will pick up this overrite file automatically to set up the rest of the environment.
