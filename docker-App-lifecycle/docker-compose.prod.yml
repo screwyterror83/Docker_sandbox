@@ -7,18 +7,18 @@ services:
       - '80:80'
 
     volumes:
-      - drupal_modules: /var/www/html/modules
-      - drupal_profiles: /var/www/html/profiles
-      - drupal_themes: /var/www/html/themes
-      - drupal_sites: /var/www/html/sites 
+      - drupal_modules:/var/www/html/modules
+      - drupal_profiles:/var/www/html/profiles
+      - drupal_themes:/var/www/html/themes
+      - drupal_sites:/var/www/html/sites 
 
   postgres:
     environment:
-      - POSGRES_PASSWORD_FILE: /run/secrets/psql-pw
+      - POSGRES_PASSWORD_FILE:/run/secrets/psql-pw
     secrets:
       - psql-pw
     volumes:
-      - drupal_data: /var/lib/postgresql/data
+      - drupal_data:/var/lib/postgresql/data
 
 volumes:
   drupal_modules:

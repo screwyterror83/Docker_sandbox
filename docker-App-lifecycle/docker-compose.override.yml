@@ -8,18 +8,18 @@ services:  # containers. same as docker run
     ports: 
       - '8080:80'
     volumes: # Optional, same as -v in docker run
-      - drupal_modules: /var/www/html/modules
-      - drupal_profiles: /var/www/html/profiles
-      - ./themes: /var/www/html/themes
-      - drupal_sites: /var/www/html/sites 
+      - drupal_modules:/var/www/html/modules
+      - drupal_profiles:/var/www/html/profiles
+      - ./themes:/var/www/html/themes
+      - drupal_sites:/var/www/html/sites 
 
   postgres:
     environment:  #if don't specify POSTGRESS_DB, the default value for db username will be 'postgres'
-      - POSTGRES_PASSWORD_FILE: /run/secrets/psql-pw
+      - POSTGRES_PASSWORD_FILE:/run/secrets/psql-pw
     secrets:
       - psql-pw
     volumes: 
-      - drupal-data: /var/lib/postgresql/data
+      - drupal-data:/var/lib/postgresql/data
 
 volumes:
   drupal_modules:
